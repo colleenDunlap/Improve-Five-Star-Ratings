@@ -1,0 +1,52 @@
+%© Colleen Dunlap
+%1/21/2017
+xlsWriteRow = 0;
+xlsReadRow = 0;
+xlsReadCol = 0;
+xlsWriteCol = 0;
+file = 'AllCycles.xls';
+importdata('cleanAlabamaRatings.mat');
+importdata('cleanReducedSummary.mat');
+providerNum = ratings(:,1);
+deficienciesTotal = deficiencies(:,3);
+deficienciesLifeThreat = deficiencies(:,5);
+deficienciesSubQOC = deficiencies(:,6);
+deficienciesAdmin = deficiencies(:,7);
+deficienciesMistreat = deficiencies(:,8);
+deficienciesNutrition = deficiencies(:,9);
+deficienciesPharma = deficiencies(:,10);
+deficienciesQualityCare = deficiencies(:,11);
+deficienciesRights = deficiencies(:,12);
+% i = 1;
+% j = 1;
+% k = 1;
+defTot = 0;
+defLT = 0;
+defSQOC = 0;
+defAdmin = 0;
+defMis = 0;
+defNut = 0;
+defPharm = 0;
+defQualCare = 0;
+defRights = 0;
+for i = 1:222
+        defTot(i,1) = deficienciesTotal(i*3)+deficienciesTotal(i*3-1)+deficienciesTotal(i*3-2);
+        defLT(i,1) = deficienciesLifeThreat(i*3)+deficienciesLifeThreat(i*3-1)+deficienciesLifeThreat(i*3-2);
+        defMis(i,1) = deficienciesMistreat(i*3)+deficienciesMistreat(i*3-1)+deficienciesMistreat(i*3-2);
+        defNut(i,1) = deficienciesNutrition(i*3)+deficienciesNutrition(i*3-1)+deficienciesNutrition(i*3-2);
+        defPharm(i,1) = deficienciesPharma(i*3)+deficienciesPharma(i*3-1)+deficienciesPharma(i*3-2);
+        defQualCare(i,1) = deficienciesQualityCare(i*3)+deficienciesQualityCare(i*3-1)+deficienciesQualityCare(i*3-2);
+        defSQOC(i,1) = deficienciesSubQOC(i*3)+deficienciesSubQOC(i*3-1)+deficienciesSubQOC(i*3-2);
+        defRights(i,1) = deficienciesRights(i*3)+deficienciesRights(i*3-1)+deficienciesRights(i*3-2);
+        defAdmin(i,1) = deficienciesAdmin(i*3)+deficienciesAdmin(i*3-1)+deficienciesAdmin(i*3-2);
+end
+m(:,1) = defTot;
+m(:,2) = defLT;
+m(:,3) = defSQOC;
+m(:,4) = defAdmin;
+m(:,5) = defMis;
+m(:,6) = defNut;
+m(:,7) = defPharm;
+m(:,8) = defQualCare;
+m(:,9) = defRights;
+xlswrite(file, m);
